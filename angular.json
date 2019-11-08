@@ -25,13 +25,29 @@
             ],
             "styles": [
               "./node_modules/plugins/fontawesome-free/css/all.min.css",
+              "./node_modules/plugins/daterangepicker/daterangepicker.css",
+              "./node_modules/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "./node_modules/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css",
+              "./node_modules/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "./node_modules/plugins/select2/css/select2.min.css",
+              "./node_modules/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css",
+              "./node_modules/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css",
               "./node_modules/dist/css/adminlte.min.css",
               "src/styles.css"
             ],
             "scripts": [
               "./node_modules/plugins/jquery/jquery.min.js",
               "./node_modules/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "./node_modules/dist/js/adminlte.min.js"
+              "./node_modules/plugins/select2/js/select2.full.min.js",
+              "./node_modules/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js",
+              "./node_modules/plugins/moment/moment.min.js",
+              "./node_modules/plugins/inputmask/min/jquery.inputmask.bundle.min.js",
+              "./node_modules/plugins/daterangepicker/daterangepicker.js",
+              "./node_modules/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js",
+              "./node_modules/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "./node_modules/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
+              "./node_modules/dist/js/adminlte.min.js",
+              "src/assets/dist/js/main.js"
             ]
           },
           "configurations": {
