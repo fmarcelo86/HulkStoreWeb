@@ -64,4 +64,9 @@ $(function () {
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
 
+    $("td a").bind('click', function(event){
+      event.preventDefault();
+      return false;
+    });
+
   });

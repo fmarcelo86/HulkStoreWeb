@@ -26,21 +26,21 @@
 
                     <div class="card card-danger">
                         <div class="card-header">
-                            <h3 class="card-title">Registrar</h3>
+                            <h3 class="card-title"><button type="submit" class="btn btn-primary btn-sm" (click)="limpiar()">Nuevo</button></h3>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-1">
-                                    <label for="example1">Id</label>
-                                    <input type="text" id="example1" class="form-control" placeholder=".col-3" readonly>
+                                    <label for="idMarca">Id</label>
+                                    <input type="text" id="idMarca" class="form-control" value="{{marcaSeleccion.id}}" readonly [(ngModel)]="marcaSeleccion.id">
                                 </div>
                                 <div class="col-10">
-                                    <label for="example2">Marca</label>
-                                    <input type="text" id="example2" class="form-control" placeholder=".col-4">
+                                    <label for="nombreMarca">Marca</label>
+                                    <input type="text" id="nombreMarca" class="form-control" value="{{marcaSeleccion.nombre}}" [(ngModel)]="marcaSeleccion.nombre">
                                 </div>
                                 <div class="col-1 mt-2">
                                     <br/>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>                                   
+                                    <button type="submit" class="btn btn-primary" (click)="marcaSeleccion.id==0?setMarca():updateMarca(marcaSeleccion)">{{marcaSeleccion.id==0?'Guardar':'Actualizar'}}</button>                                   
                                 </div>                                                                         
                             </div>
                         </div>
@@ -75,14 +75,16 @@
                             <thead>
                               <tr>
                                 <th>ID</th>
-                                <th>Marca</th>                               
+                                <th>Marca</th>
+                                <th>Acción</th>                          
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>183</td>                                
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                              </tr>                              
+                              <tr *ngFor="let marca of marcas">
+                                <td>{{marca.id}}</td>                                
+                                <td><a href="#" (click)="seleccionarMarca($event, marca)">{{marca.nombre}}</a></td>
+                                <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteMarca(marca.id)">Eliminar</button></td>
+                              </tr>
                             </tbody>
                           </table>
                         </div>
