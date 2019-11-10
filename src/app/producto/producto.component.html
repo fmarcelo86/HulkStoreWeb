@@ -1,1 +1,141 @@
-<p>producto works!</p>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Producto</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Producto</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements disabled -->
+                    <div class="card card-warning">
+                      <div class="card-header">
+                          <h3 class="card-title"><button type="submit" class="btn btn-primary btn-sm" (click)="limpiar()">Nuevo</button></h3>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <form role="form">
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <!-- text input -->
+                              <div class="form-group">
+                                <label>Categoría</label>
+                                <select name="categoria" [(ngModel)]="productoSeleccion.categoria.id" class="form-control form-control-sm" >
+                                    <option value="0">-- Seleccione --</option>
+                                    <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.nombre}}</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label>Marca</label>
+                                <select name="marca" [(ngModel)]="productoSeleccion.marca.id" class="form-control form-control-sm" >
+                                    <option value="0">-- Seleccione --</option>
+                                    <option *ngFor="let marca of marcas" [ngValue]="marca.id">{{marca.nombre}}</option>
+                              </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">                        
+                              <div class="form-group">
+                                <label>Producto</label>
+                                <input type="text" class="form-control" name="nombre" [(ngModel)]="productoSeleccion.nombre">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">                            
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label>Precio</label>
+                                <input type="text" class="form-control" name="precio" [(ngModel)]="productoSeleccion.precio">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label>Stock</label>
+                                <input type="text" class="form-control" name="stock" [(ngModel)]="productoSeleccion.stock">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">     
+                               <div class="form-group mt-2">
+                                 <br/>
+                                 <button type="button" class="btn btn-primary btn-sm ml-auto" (click)="productoSeleccion.id==0?setProducto():updateProducto(productoSeleccion)" >{{productoSeleccion.id==0?'Guardar':'Actualizar'}}</button>
+                              </div>  
+                            </div>
+                          </div>                                                     
+                        </form>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>                    
+                  </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">Productos</h3>
+          
+                          <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+          
+                              <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0 table-sm">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Categoría</th>
+                                <th>Marca</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acción</th>                          
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let producto of productos">
+                                <td>{{producto.id}}</td>
+                                <td>{{producto.categoria.nombre}}</td>
+                                <td>{{producto.marca.nombre}}</td>
+                                <td><a href="#" (click)="seleccionarProducto($event, producto)">{{producto.nombre}}</a></td>
+                                <td>{{producto.precio}}</td>
+                                <td>{{producto.stock}}</td>
+                                <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteProducto(producto.id)">Eliminar</button></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                    </div>
+                  </div>
+                  <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
