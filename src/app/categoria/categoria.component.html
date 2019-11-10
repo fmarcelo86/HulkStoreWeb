@@ -26,22 +26,22 @@
     
                         <div class="card card-danger">
                             <div class="card-header">
-                                <h3 class="card-title">Registrar</h3>
+                              <h3 class="card-title"><button type="submit" class="btn btn-primary btn-sm" (click)="limpiar()">Nuevo</button></h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-1">
-                                        <label for="example1">Id</label>
-                                        <input type="text" id="example1" class="form-control" placeholder=".col-3" readonly>
-                                    </div>
-                                    <div class="col-10">
-                                        <label for="example2">Categoría</label>
-                                        <input type="text" id="example2" class="form-control" placeholder=".col-4">
-                                    </div>
-                                    <div class="col-1 mt-2">
-                                        <br/>
-                                        <button type="submit" class="btn btn-primary">Guardar</button>                                   
-                                    </div>                                                                         
+                                  <div class="col-1">
+                                    <label for="idCategoria">Id</label>
+                                    <input type="text" id="idCategoria" class="form-control" value="{{categoriaSeleccion.id}}" readonly [(ngModel)]="categoriaSeleccion.id">
+                                  </div>
+                                  <div class="col-10">
+                                      <label for="nombreCategoria">Categoria</label>
+                                      <input type="text" id="nombreCategoria" class="form-control" value="{{categoriaSeleccion.nombre}}" [(ngModel)]="categoriaSeleccion.nombre">
+                                  </div>
+                                  <div class="col-1 mt-2">
+                                      <br/>
+                                      <button type="submit" class="btn btn-primary" (click)="categoriaSeleccion.id==0?setCategoria():updateCategoria(categoriaSeleccion)">{{categoriaSeleccion.id==0?'Guardar':'Actualizar'}}</button>                                   
+                                  </div>                                                                         
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -75,14 +75,16 @@
                                 <thead>
                                   <tr>
                                     <th>ID</th>
-                                    <th>Categoría</th>                               
+                                    <th>Categoría</th>
+                                    <th>Acción</th>                              
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>183</td>                                
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                  </tr>                              
+                                  <tr *ngFor="let categoria of categorias">
+                                    <td>{{categoria.id}}</td>                                
+                                    <td><a href="#" (click)="seleccionarCategoria($event, categoria)">{{categoria.nombre}}</a></td>
+                                    <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteCategoria(categoria.id)">Eliminar</button></td>
+                                  </tr>                            
                                 </tbody>
                               </table>
                             </div>

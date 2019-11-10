@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { Marca } from './marca';
+import { Categoria } from './categoria';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,40 +13,40 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class MarcaService {
+export class CategoriaService {
   baseUrl: string = "http://localhost:8888/HulkStore";
 
   constructor(private http: HttpClient) { }
 
-  getMarcas(): Observable<Marca[]> {
-    const url = `${this.baseUrl}/marca`;
-    return this.http.get<Marca[]>(url, httpOptions)
+  getCategorias(): Observable<Categoria[]> {
+    const url = `${this.baseUrl}/categoria`;
+    return this.http.get<Categoria[]>(url, httpOptions)
     .pipe(catchError(err => {
           console.log('Handling error locally and rethrowing it...', err);
           return throwError(err);
     }));
   }
 
-  setMarca(marca: Marca): Observable<Marca> {
-    const url = `${this.baseUrl}/marca`; 
-    return this.http.post<Marca>(url, marca, httpOptions)
+  setCategoria(categoria: Categoria): Observable<Categoria> {
+    const url = `${this.baseUrl}/categoria`; 
+    return this.http.post<Categoria>(url, categoria, httpOptions)
     .pipe(catchError(err => {
           console.log('Handling error locally and rethrowing it...', err);
           return throwError(err);
     }));
   }
 
-  updateMarca(marca: Marca): Observable<Marca> {
-    const url = `${this.baseUrl}/marca`;
-    return this.http.put<Marca>(url, marca, httpOptions)
+  updateCategoria(categoria: Categoria): Observable<Categoria> {
+    const url = `${this.baseUrl}/categoria`;
+    return this.http.put<Categoria>(url, categoria, httpOptions)
     .pipe(catchError(err => {
           console.log('Handling error locally and rethrowing it...', err);
           return throwError(err);
     }));
   }
 
-  deleteMarca(idMarca: number): Observable<void> {
-    const url = `${this.baseUrl}/marca/${idMarca}`;
+  deleteCategoria(idCategoria: number): Observable<void> {
+    const url = `${this.baseUrl}/categoria/${idCategoria}`;
     return this.http.delete<void>(url, httpOptions)
     .pipe(catchError(err => {
           console.log('Handling error locally and rethrowing it...', err);
