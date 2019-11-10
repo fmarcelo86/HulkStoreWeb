@@ -1,0 +1,189 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Venta</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Venta</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements disabled -->
+                    <div class="card card-warning">
+                      <div class="card-header">
+                          <h3 class="card-title"><button type="submit" class="btn btn-primary btn-sm" (click)="limpiar()">Nuevo</button></h3>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        <form role="form">
+                          <div class="row">
+                            <div class="col-sm-2">
+                              <!-- text input -->
+                              <div class="form-group row">                                
+                                <label for="cedula" class="col-sm-4 col-form-label-sm">Cédula</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" id="cedula">
+                                </div>
+                            </div>
+                           </div>
+                            <div class="col-sm-4">
+                              <div class="form-group row">
+                                <label for="nombre" class="col-sm-4 col-form-label form-control-sm">Nombre Cliente</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" id="nombre">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="form-group row">
+                                <label for="telefono" class="col-sm-4 col-form-label col-form-label-sm">Teléfono</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" id="telefono">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="form-group row">
+                                <label for="direccion" class="col-sm-4 col-form-label col-form-label-sm">Dirección</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control form-control-sm" id="direccion">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">                            
+                            <div class="col-sm-1">
+                              <div class="form-group">
+                                <label>Código</label>
+                                <input type="text" class="form-control form-control-sm" name="codigo" [(ngModel)]="productoSeleccion.precio">
+                              </div>
+                            </div>
+                            <div class="col-sm-5">
+                              <div class="form-group">
+                                <label class="text-sm">Nombre Articulo</label>
+                                <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">     
+                               <div class="form-group">
+                                <label class="text-sm">Catidad</label>
+                                <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                              </div>  
+                            </div>
+                            <div class="col-sm-2">     
+                              <div class="form-group">
+                               <label class="text-sm">Precio</label>
+                               <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                             </div>  
+                           </div>
+                           <div class="col-sm-2">     
+                            <div class="form-group form-group-sm">
+                             <label class="text-sm">Valor Total</label>
+                             <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                           </div>  
+                         </div>
+                          </div>     
+                          <div class="row">
+
+                              <div class="card-body table-responsive p-0 table-sm">
+                                  <table class="table table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th>Codigo</th>
+                                        <th>Articulo</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>SubTotal</th>                                    
+                                        <th>Acción</th>                          
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let producto of productos">
+                                        <td>{{producto.id}}</td>
+                                        <td>{{producto.categoria.nombre}}</td>
+                                        <td>{{producto.marca.nombre}}</td>
+                                        <td><a href="#" (click)="seleccionarProducto($event, producto)">{{producto.nombre}}</a></td>
+                                        <td>{{producto.precio}}</td>                                      
+                                        <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteProducto(producto.id)">Eliminar</button></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+
+                          </div>                                                
+                        </form>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>                    
+                  </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">Ventas</h3>
+          
+                          <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+          
+                              <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0 table-sm">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Categoría</th>
+                                <th>Marca</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acción</th>                          
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let producto of productos">
+                                <td>{{producto.id}}</td>
+                                <td>{{producto.categoria.nombre}}</td>
+                                <td>{{producto.marca.nombre}}</td>
+                                <td><a href="#" (click)="seleccionarProducto($event, producto)">{{producto.nombre}}</a></td>
+                                <td>{{producto.precio}}</td>
+                                <td>{{producto.stock}}</td>
+                                <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteProducto(producto.id)">Eliminar</button></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                    </div>
+                  </div>
+                  <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

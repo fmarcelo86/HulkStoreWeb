@@ -5,6 +5,7 @@ import { MarcaComponent } from './marca/marca.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { ProductoComponent } from './producto/producto.component';
+import { VentaComponent } from './venta/venta.component';
 
 const routes: Routes = [
   { path:'' , component: HomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path:'categoria' , component: CategoriaComponent },
   { path:'cliente' , component: ClienteComponent },
   { path:'producto' , component: ProductoComponent },
+  { path:'venta' , component: VentaComponent },
   { path:'**' , redirectTo: '' }
 ];
 

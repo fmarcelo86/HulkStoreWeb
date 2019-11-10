@@ -11,6 +11,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProductoComponent } from './producto/producto.component';
+import { VentaComponent } from './venta/venta.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductoComponent } from './producto/producto.component';
     MarcaComponent,
     CategoriaComponent,
     ClienteComponent,
-    ProductoComponent
+    ProductoComponent,
+    VentaComponent
   ],
   imports: [
     BrowserModule,

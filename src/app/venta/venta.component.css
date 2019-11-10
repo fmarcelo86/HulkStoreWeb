@@ -1,0 +1,11 @@
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 500;    
+}
+
+label { 
+    flex: 0 0 38.333333%;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
