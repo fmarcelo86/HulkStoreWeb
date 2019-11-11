@@ -44,7 +44,7 @@
                               <div class="form-group row">
                                 <label for="nombre" class="col-sm-4 col-form-label form-control-sm">Nombre Cliente</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" id="nombre">
+                                    <input type="text" class="form-control form-control-sm" id="nombre" readonly>
                                 </div>
                               </div>
                             </div>
@@ -52,7 +52,7 @@
                               <div class="form-group row">
                                 <label for="telefono" class="col-sm-4 col-form-label col-form-label-sm">Teléfono</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" id="telefono">
+                                    <input type="text" class="form-control form-control-sm" id="telefono" readonly>
                                 </div>
                               </div>
                             </div>
@@ -60,7 +60,7 @@
                               <div class="form-group row">
                                 <label for="direccion" class="col-sm-4 col-form-label col-form-label-sm">Dirección</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm" id="direccion">
+                                    <input type="text" class="form-control form-control-sm" id="direccion" readonly>
                                 </div>
                               </div>
                             </div>
@@ -69,31 +69,33 @@
                             <div class="col-sm-1">
                               <div class="form-group">
                                 <label>Código</label>
-                                <input type="text" class="form-control form-control-sm" name="codigo" [(ngModel)]="productoSeleccion.precio">
+                                <input type="text" class="form-control form-control-sm" name="idVenta" [(ngModel)]="productoSeleccion.id" readonly>
                               </div>
                             </div>
                             <div class="col-sm-5">
-                              <div class="form-group">
+                              <div class="form-group">                               
                                 <label class="text-sm">Nombre Articulo</label>
-                                <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                                <select name="productoSeleccion" class="form-control form-control-sm" [(ngModel)]="productoSeleccion" (change)="completarProd()" style="width: 100%;">
+                                  <option *ngFor="let producto of productos" [ngValue]="producto">{{producto.nombre}}</option>                                  
+                                </select>
                               </div>
                             </div>
                             <div class="col-sm-2">     
                                <div class="form-group">
                                 <label class="text-sm">Catidad</label>
-                                <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                                <input type="text" class="form-control form-control-sm" name="cantidad" [(ngModel)]="productoVenta.cantidad" (keydown.enter)="agregarProdVenta($event)">
                               </div>  
                             </div>
                             <div class="col-sm-2">     
                               <div class="form-group">
                                <label class="text-sm">Precio</label>
-                               <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                               <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.precio" readonly>
                              </div>  
                            </div>
                            <div class="col-sm-2">     
                             <div class="form-group form-group-sm">
                              <label class="text-sm">Valor Total</label>
-                             <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.stock">
+                             <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoVenta.valorTotal" readonly>
                            </div>  
                          </div>
                           </div>     
@@ -112,13 +114,13 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr *ngFor="let producto of productos">
-                                        <td>{{producto.id}}</td>
-                                        <td>{{producto.categoria.nombre}}</td>
-                                        <td>{{producto.marca.nombre}}</td>
-                                        <td><a href="#" (click)="seleccionarProducto($event, producto)">{{producto.nombre}}</a></td>
-                                        <td>{{producto.precio}}</td>                                      
-                                        <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteProducto(producto.id)">Eliminar</button></td>
+                                      <tr *ngFor="let prodVenta of venta.productoVenta">
+                                        <td>{{prodVenta.producto.id}}</td>
+                                        <td>{{prodVenta.producto.nombre}}</td>
+                                        <td>{{prodVenta.cantidad}}</td>                                      
+                                        <td>{{prodVenta.precio}}</td>
+                                        <td>{{prodVenta.precio*prodVenta.cantidad}}</td>
+                                        <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteProdVenta(prodVenta)">Eliminar</button></td>
                                       </tr>
                                     </tbody>
                                   </table>

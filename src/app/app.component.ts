@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     $(document).ready(function () {
-      //alert("Hola");
+      //alert("Hola");       
     });
   }
 }

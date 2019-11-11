@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProductoComponent } from './producto/producto.component';
 import { VentaComponent } from './venta/venta.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { VentaComponent } from './venta/venta.component';
     CategoriaComponent,
     ClienteComponent,
     ProductoComponent,
-    VentaComponent
+    VentaComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
