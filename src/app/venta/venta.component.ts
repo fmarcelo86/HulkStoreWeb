@@ -3,6 +3,7 @@ import { ProductoService } from '../producto/producto.service';
 import { Producto } from '../producto/producto';
 import { Venta } from './venta';
 import { ProductoVenta } from './producto-venta';
+import { filter } from 'rxjs/operators';
 declare var jQuery:any;
 declare var $: any;
 
@@ -23,6 +24,8 @@ export class VentaComponent implements OnInit {
     ) { }
     @ViewChild("txtCantidad", { static: false }) 
     private txtCantidad?: ElementRef<HTMLElement>;
+    @ViewChild("cmbProducto", { static: false }) 
+    private cmbProducto?: ElementRef<HTMLElement>;   
 
   ngOnInit() {  
     this.productos = [];
@@ -48,13 +51,20 @@ export class VentaComponent implements OnInit {
   agregarProdVenta(): void {
     if(this.productoVenta.cantidad > 0) {
       this.productoVenta.producto = this.productoSeleccion;
-      this.venta.productoVenta.push(this.productoVenta);
+      let prodVenta: ProductoVenta  = this.venta.productoVenta.find(pVenta => pVenta.producto.id == this.productoVenta.producto.id);
+      console.log(prodVenta);
+      console.log(this.productoVenta);
+      if(prodVenta != null || prodVenta != undefined) {
+        prodVenta.cantidad += this.productoVenta.cantidad;
+      } else {
+        this.venta.productoVenta.push(this.productoVenta);
+      }     
       this.nuevoProducto();
     }
   }
 
   completarProd(): void {
-    console.log(this.productoSeleccion);
+    //console.log(this.productoSeleccion);
     this.txtCantidad.nativeElement.focus();
   }
 
