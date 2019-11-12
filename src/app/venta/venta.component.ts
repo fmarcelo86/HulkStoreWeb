@@ -44,9 +44,6 @@ export class VentaComponent implements OnInit {
 
   completarProd(): void {
     console.log(this.productoSeleccion);
-    //this.venta.valorTotal = 2222;
-    //this.productoVenta.valor
-    //this.productoVenta.
   }
 
   nuevoProducto(): void {
