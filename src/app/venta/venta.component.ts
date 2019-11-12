@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { ProductoService } from '../producto/producto.service';
 import { Producto } from '../producto/producto';
 import { Venta } from './venta';
 import { ProductoVenta } from './producto-venta';
+declare var jQuery:any;
+declare var $: any;
 
 @Component({
   selector: 'app-venta',
@@ -16,12 +18,19 @@ export class VentaComponent implements OnInit {
   venta: Venta;
   ventas: Venta[];
 
-  constructor(private productoService: ProductoService) { }
+  constructor(private productoService: ProductoService,
+              private renderer: Renderer2
+    ) { }
+    @ViewChild("txtCantidad", { static: false }) 
+    private txtCantidad?: ElementRef<HTMLElement>;
 
   ngOnInit() {  
     this.productos = [];
     this.limpiar();
     this.getProductos();
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
   }
 
   getProductos(): void {
@@ -37,13 +46,16 @@ export class VentaComponent implements OnInit {
   }
 
   agregarProdVenta(): void {
-    this.productoVenta.producto = this.productoSeleccion;
-    this.venta.productoVenta.push(this.productoVenta);
-    this.nuevoProducto();
+    if(this.productoVenta.cantidad > 0) {
+      this.productoVenta.producto = this.productoSeleccion;
+      this.venta.productoVenta.push(this.productoVenta);
+      this.nuevoProducto();
+    }
   }
 
   completarProd(): void {
     console.log(this.productoSeleccion);
+    this.txtCantidad.nativeElement.focus();
   }
 
   nuevoProducto(): void {
