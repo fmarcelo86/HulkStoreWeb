@@ -8,7 +8,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { VentaComponent } from './venta/venta.component';
 
 const routes: Routes = [
-  { path:'' , component: HomeComponent },
+  { path:'' , component: VentaComponent },
   { path:'marca' , component: MarcaComponent },
   { path:'categoria' , component: CategoriaComponent },
   { path:'cliente' , component: ClienteComponent },
