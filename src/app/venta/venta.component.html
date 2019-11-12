@@ -25,7 +25,7 @@
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                       <div class="card-header">
-                          <h3 class="card-title"><button type="submit" class="btn btn-primary btn-sm" (click)="limpiar()">Nuevo</button></h3>
+                          <h3 class="card-title"><button type="button" class="btn btn-primary btn-sm" (click)="limpiar()">Nuevo</button></h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body">
@@ -83,7 +83,7 @@
                             <div class="col-sm-2">     
                                <div class="form-group">
                                 <label class="text-sm">Catidad</label>
-                                <input type="text" class="form-control form-control-sm" name="cantidad" [(ngModel)]="productoVenta.cantidad" (keydown.enter)="agregarProdVenta($event)">
+                                <input type="text" class="form-control form-control-sm" name="cantidad" [(ngModel)]="productoVenta.cantidad" (keydown.enter)="agregarProdVenta()">
                               </div>  
                             </div>
                             <div class="col-sm-2">     
@@ -95,7 +95,7 @@
                            <div class="col-sm-2">     
                             <div class="form-group form-group-sm">
                              <label class="text-sm">Valor Total</label>
-                             <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoVenta.valorTotal" readonly>
+                             <input type="text" class="form-control form-control-sm" name="stock" value="{{productoSeleccion.precio*productoVenta.cantidad}}" readonly>
                            </div>  
                          </div>
                           </div>     
@@ -105,7 +105,7 @@
                                   <table class="table table-hover">
                                     <thead>
                                       <tr>
-                                        <th>Codigo</th>
+                                        <th>Código</th>
                                         <th>Articulo</th>
                                         <th>Cantidad</th>
                                         <th>Precio</th>
@@ -118,15 +118,17 @@
                                         <td>{{prodVenta.producto.id}}</td>
                                         <td>{{prodVenta.producto.nombre}}</td>
                                         <td>{{prodVenta.cantidad}}</td>                                      
-                                        <td>{{prodVenta.precio}}</td>
-                                        <td>{{prodVenta.precio*prodVenta.cantidad}}</td>
-                                        <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteProdVenta(prodVenta)">Eliminar</button></td>
+                                        <td>{{prodVenta.producto.precio}}</td>
+                                        <td>{{prodVenta.producto.precio*prodVenta.cantidad}}</td>
+                                        <td><button type="button" class="btn btn-primary btn-sm btn-danger" (click)="deleteProdVenta(prodVenta)">Eliminar</button></td>
                                       </tr>
                                     </tbody>
                                   </table>
                                 </div>
-
-                          </div>                                                
+                          </div>
+                          <div class="row pt-2">
+                              <button type="submit" class="btn btn-primary btn-sm">Vender</button>
+                          </div>                                            
                         </form>
                       </div>
                       <!-- /.card-body -->
@@ -146,7 +148,7 @@
                               <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
           
                               <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                <button type="button" class="btn btn-default"><i class="fas fa-search"></i></button>
                               </div>
                             </div>
                           </div>
@@ -157,23 +159,19 @@
                             <thead>
                               <tr>
                                 <th>ID</th>
-                                <th>Categoría</th>
-                                <th>Marca</th>
-                                <th>Producto</th>
-                                <th>Precio</th>
-                                <th>Stock</th>
-                                <th>Acción</th>                          
+                                <th>Cliente</th>
+                                <th>Vendedor</th>
+                                <th>Valor Total</th>
+                                <th>Fecha Venta</th>                      
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let producto of productos">
-                                <td>{{producto.id}}</td>
-                                <td>{{producto.categoria.nombre}}</td>
-                                <td>{{producto.marca.nombre}}</td>
-                                <td><a href="#" (click)="seleccionarProducto($event, producto)">{{producto.nombre}}</a></td>
-                                <td>{{producto.precio}}</td>
-                                <td>{{producto.stock}}</td>
-                                <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteProducto(producto.id)">Eliminar</button></td>
+                              <tr *ngFor="let venta of ventas">
+                                <td>{{venta.id}}</td>
+                                <td>{{venta.cliente.nombre}}</td>
+                                <td>{{venta.usuario.nombre}}</td>                             
+                                <td>{{venta.valorTotal}}</td>
+                                <td>{{venta.fechaVenta}}</td>                                                       
                               </tr>
                             </tbody>
                           </table>

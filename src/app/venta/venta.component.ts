@@ -3,8 +3,6 @@ import { ProductoService } from '../producto/producto.service';
 import { Producto } from '../producto/producto';
 import { Venta } from './venta';
 import { ProductoVenta } from './producto-venta';
-declare var jQuery:any;
-declare var $: any;
 
 @Component({
   selector: 'app-venta',
@@ -16,16 +14,11 @@ export class VentaComponent implements OnInit {
   productoSeleccion: Producto;
   productoVenta: ProductoVenta;
   venta: Venta;
+  ventas: Venta[];
 
   constructor(private productoService: ProductoService) { }
 
-  ngOnInit() {
-    $(document).ready(function () {
-      $('.select2').select2();
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      });      
-    });
+  ngOnInit() {  
     this.productos = [];
     this.limpiar();
     this.getProductos();
@@ -35,22 +28,28 @@ export class VentaComponent implements OnInit {
     this.productoService.getProductos().subscribe(resp => this.productos = resp);
   }
 
-  deleteProdVenta(): void {
-   
+  deleteProdVenta(prodVenta): void {
+    this.venta.productoVenta = this.venta.productoVenta.filter(pVenta => pVenta.id != prodVenta.id);    
   } 
 
+  getValorTotal(precio: number, cantidad: number): number {
+    return precio*cantidad;
+  }
+
   agregarProdVenta(): void {
+    this.productoVenta.producto = this.productoSeleccion;
     this.venta.productoVenta.push(this.productoVenta);
+    this.nuevoProducto();
   }
 
   completarProd(): void {
     console.log(this.productoSeleccion);
-    this.venta.valorTotal = 2222;
+    //this.venta.valorTotal = 2222;
     //this.productoVenta.valor
     //this.productoVenta.
   }
 
-  limpiar(): void {
+  nuevoProducto(): void {
     this.productoVenta = {
       id: 0,
       producto: {
@@ -62,7 +61,7 @@ export class VentaComponent implements OnInit {
         stock: 0
       },
       cantidad: 0
-    }
+    };
     this.productoSeleccion = {
       id: 0, 
       categoria: {id: 0, nombre: ""},
@@ -70,8 +69,11 @@ export class VentaComponent implements OnInit {
       nombre: "",
       precio: 0.0,
       stock: 0
-    }
+    };
+  }
 
+  limpiar(): void {
+    this.nuevoProducto();
     this.venta = {
       id: 0,
       cliente: {},
@@ -81,5 +83,4 @@ export class VentaComponent implements OnInit {
       fechaVenta: ""
     };
   }
-
 }
