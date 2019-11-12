@@ -19,8 +19,17 @@ export class VentaService {
   constructor(private http: HttpClient) { }
   
   getVentas(): Observable<Venta[]> {
-    const url = `${this.baseUrl}/marca`;
+    const url = `${this.baseUrl}/venta`;
     return this.http.get<Venta[]>(url, httpOptions)
+    .pipe(catchError(err => {
+          console.log('Handling error locally and rethrowing it...', err);
+          return throwError(err);
+    }));
+  }
+
+  setVenta(venta: Venta): Observable<Venta> {
+    const url = `${this.baseUrl}/venta`;
+    return this.http.post<Venta>(url, venta, httpOptions)
     .pipe(catchError(err => {
           console.log('Handling error locally and rethrowing it...', err);
           return throwError(err);

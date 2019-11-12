@@ -4,6 +4,7 @@ import { Producto } from '../producto/producto';
 import { Venta } from './venta';
 import { ProductoVenta } from './producto-venta';
 import { filter } from 'rxjs/operators';
+import { VentaService } from './venta.service';
 declare var jQuery:any;
 declare var $: any;
 
@@ -20,6 +21,7 @@ export class VentaComponent implements OnInit {
   ventas: Venta[];
 
   constructor(private productoService: ProductoService,
+              private ventaService: VentaService,
               private renderer: Renderer2
     ) { }
     @ViewChild("txtCantidad", { static: false }) 
@@ -40,12 +42,29 @@ export class VentaComponent implements OnInit {
     this.productoService.getProductos().subscribe(resp => this.productos = resp);
   }
 
-  deleteProdVenta(prodVenta): void {
-    this.venta.productoVenta = this.venta.productoVenta.filter(pVenta => pVenta.id != prodVenta.id);    
+  deleteProdVenta(prodVenta: ProductoVenta): void {
+    this.venta.productoVenta = this.venta.productoVenta.filter(pVenta => pVenta.producto.id != prodVenta.producto.id);    
   } 
 
-  getValorTotal(precio: number, cantidad: number): number {
-    return precio*cantidad;
+  setVenta(): void {
+    this.ventaService.setVenta(this.venta).subscribe(resp => this.venta = resp);
+  }
+
+  getValorTotal(): number {
+    this.venta.valorTotal = 0;
+    this.venta.productoVenta.forEach(function(prodVenta: ProductoVenta) {
+      this.venta.valorTotal += (prodVenta.producto.precio*prodVenta.cantidad);
+      console.log(prodVenta);
+    }, this);
+    return this.venta.valorTotal;
+  }
+
+  getSubTotal(): number {
+    let subTotal: number = 0;
+    this.venta.productoVenta.forEach(function(prodVenta: ProductoVenta) {
+      subTotal += prodVenta.producto.precio;    
+    }, this);
+    return subTotal;
   }
 
   agregarProdVenta(): void {
@@ -68,6 +87,7 @@ export class VentaComponent implements OnInit {
     this.txtCantidad.nativeElement.focus();
   }
 
+  
   nuevoProducto(): void {
     this.productoVenta = {
       id: 0,

@@ -122,12 +122,17 @@
                                         <td>{{prodVenta.producto.precio*prodVenta.cantidad}}</td>
                                         <td><button type="button" class="btn btn-primary btn-sm btn-danger" (click)="deleteProdVenta(prodVenta)">Eliminar</button></td>
                                       </tr>
+                                      <tr>
+                                          <td colspan="3">Total</td>
+                                          <td>{{ getSubTotal() }}</td>
+                                          <td>{{ getValorTotal() }}</td>
+                                      </tr>
                                     </tbody>
                                   </table>
                                 </div>
                           </div>
                           <div class="row pt-2">
-                              <button type="submit" class="btn btn-primary btn-sm">Vender</button>
+                              <button type="button" class="btn btn-primary btn-sm" (click)="setVenta()">Vender</button>
                           </div>                                            
                         </form>
                       </div>
