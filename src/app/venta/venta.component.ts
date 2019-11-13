@@ -5,6 +5,8 @@ import { Venta } from './venta';
 import { ProductoVenta } from './producto-venta';
 import { filter } from 'rxjs/operators';
 import { VentaService } from './venta.service';
+import { ClienteService } from '../cliente/cliente.service';
+import { Cliente } from '../cliente/cliente';
 declare var jQuery:any;
 declare var $: any;
 
@@ -14,6 +16,7 @@ declare var $: any;
   styleUrls: ['./venta.component.css']
 })
 export class VentaComponent implements OnInit {
+  //cliente: Cliente;
   productos: Producto[];
   productoSeleccion: Producto;
   productoVenta: ProductoVenta;
@@ -22,6 +25,7 @@ export class VentaComponent implements OnInit {
 
   constructor(private productoService: ProductoService,
               private ventaService: VentaService,
+              private clienteService: ClienteService,
               private renderer: Renderer2
     ) { }
     @ViewChild("txtCantidad", { static: false }) 
@@ -50,6 +54,10 @@ export class VentaComponent implements OnInit {
 
   getVentas(): void {
     this.ventaService.getVentas().subscribe(resp => this.ventas = resp);
+  }
+
+  getClienteByCedula(): void {
+    this.clienteService.getClienteByCedula(this.venta.cliente.cedula).subscribe(resp => this.venta.cliente = resp);
   }
 
   setVenta(): void {
@@ -82,9 +90,7 @@ export class VentaComponent implements OnInit {
         return;
       }
       this.productoVenta.producto = this.productoSeleccion;
-      let prodVenta: ProductoVenta  = this.venta.productoVenta.find(pVenta => pVenta.producto.id == this.productoVenta.producto.id);
-      console.log(prodVenta);
-      console.log(this.productoVenta);
+      let prodVenta: ProductoVenta  = this.venta.productoVenta.find(pVenta => pVenta.producto.id == this.productoVenta.producto.id);     
       if(prodVenta != null || prodVenta != undefined) {
         prodVenta.cantidad += this.productoVenta.cantidad;
       } else {
@@ -99,7 +105,7 @@ export class VentaComponent implements OnInit {
   }
 
   
-  nuevoProducto(): void {
+  nuevoProducto(): void {   
     this.productoVenta = {
       id: null,
       producto: {
@@ -126,8 +132,15 @@ export class VentaComponent implements OnInit {
     this.nuevoProducto();
     this.venta = {
       id: null,
-      cliente: {},
-      usuario: {},
+      cliente: {
+        id: null,
+        cedula: null,
+        nombre: null,
+        celular: null,
+        email: null,
+        direccion: null
+      },
+      usuario: null,
       productoVenta: [],
       valorTotal: 0,
       fechaVenta: null
