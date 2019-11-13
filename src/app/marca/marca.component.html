@@ -83,7 +83,7 @@
                               <tr *ngFor="let marca of marcas">
                                 <td>{{marca.id}}</td>                                
                                 <td><a href="#" (click)="seleccionarMarca($event, marca)">{{marca.nombre}}</a></td>
-                                <td><button type="submit" class="btn btn-primary btn-sm btn-danger" (click)="deleteMarca(marca.id)">Eliminar</button></td>
+                                <td><button type="button" class="btn btn-primary btn-sm btn-danger" (click)="deleteMarca(marca.id)">Eliminar</button></td>
                               </tr>
                             </tbody>
                           </table>

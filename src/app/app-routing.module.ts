@@ -14,6 +14,7 @@ const routes: Routes = [
   { path:'cliente' , component: ClienteComponent },
   { path:'producto' , component: ProductoComponent },
   { path:'venta' , component: VentaComponent },
+  { path:'cliente' , component: VentaComponent },
   { path:'**' , redirectTo: '' }
 ];
 
