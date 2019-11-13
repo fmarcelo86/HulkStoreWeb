@@ -9,3 +9,8 @@ label {
 .form-group {
     margin-bottom: 0;
 }
+
+.alert {   
+  position: fixed; 
+    z-index: 1000;
+}

@@ -8,5 +8,5 @@ export class Venta {
     usuario: Usuario;
     productoVenta: ProductoVenta[];
     valorTotal: number;
-    fechaVenta: string;
+    fechaVenta: Date;
 }

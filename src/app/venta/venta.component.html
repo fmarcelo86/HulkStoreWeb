@@ -11,12 +11,20 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Venta</li>
-                    </ol>
-                </div>
-            </div>
+                    </ol>                    
+                    <div #altStock class="alert alert-warning alert-dismissible fade" role="alert">
+                        <strong>Stock</strong> superado para este producto
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>   
+                </div>                
+            </div>  
+                        
         </div><!-- /.container-fluid -->
+       
     </section>
-
+    
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -75,7 +83,7 @@
                             <div class="col-sm-5">
                               <div class="form-group">                               
                                 <label class="text-sm">Nombre Articulo</label>
-                                <select #cmbProducto name="productoSeleccion" class="form-control form-control-sm" [(ngModel)]="productoSeleccion" (change)="completarProd()" style="width: 100%;">
+                                <select name="productoSeleccion" class="form-control form-control-sm" [(ngModel)]="productoSeleccion" (change)="completarProd()" style="width: 100%;">
                                   <option *ngFor="let producto of productos" [ngValue]="producto">{{producto.nombre}}</option>                                  
                                 </select>
                               </div>
@@ -89,13 +97,13 @@
                             <div class="col-sm-2">     
                               <div class="form-group">
                                <label class="text-sm">Precio</label>
-                               <input type="text" class="form-control form-control-sm" name="stock" [(ngModel)]="productoSeleccion.precio" readonly>
+                               <input type="text" class="form-control form-control-sm" name="stock" value="{{productoSeleccion.precio | currency}}" readonly>
                              </div>  
                            </div>
                            <div class="col-sm-2">     
                             <div class="form-group form-group-sm">
                              <label class="text-sm">Valor Total</label>
-                             <input type="text" class="form-control form-control-sm" name="stock" value="{{productoSeleccion.precio*productoVenta.cantidad}}" readonly>
+                             <input type="text" class="form-control form-control-sm" name="stock" value="{{productoSeleccion.precio*productoVenta.cantidad | currency}}" readonly>
                            </div>  
                          </div>
                           </div>     
@@ -118,14 +126,14 @@
                                         <td>{{prodVenta.producto.id}}</td>
                                         <td>{{prodVenta.producto.nombre}}</td>
                                         <td>{{prodVenta.cantidad}}</td>                                      
-                                        <td>{{prodVenta.producto.precio}}</td>
-                                        <td>{{prodVenta.producto.precio*prodVenta.cantidad}}</td>
+                                        <td>{{prodVenta.producto.precio | currency}}</td>
+                                        <td>{{prodVenta.producto.precio*prodVenta.cantidad | currency}}</td>
                                         <td><button type="button" class="btn btn-primary btn-sm btn-danger" (click)="deleteProdVenta(prodVenta)">Eliminar</button></td>
                                       </tr>
                                       <tr>
                                           <td colspan="3">Total</td>
-                                          <td>{{ getSubTotal() }}</td>
-                                          <td>{{ getValorTotal() }}</td>
+                                          <td>{{ getSubTotal() | currency}}</td>
+                                          <td>{{ getValorTotal() | currency}}</td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -175,8 +183,8 @@
                                 <td>{{venta.id}}</td>
                                 <td>{{venta.cliente.nombre}}</td>
                                 <td>{{venta.usuario.nombre}}</td>                             
-                                <td>{{venta.valorTotal}}</td>
-                                <td>{{venta.fechaVenta}}</td>                                                       
+                                <td>{{venta.valorTotal | currency}}</td>
+                                <td>{{venta.fechaVenta | date:'dd-MM-yyyy hh:mm:ss'}}</td>                                                       
                               </tr>
                             </tbody>
                           </table>
